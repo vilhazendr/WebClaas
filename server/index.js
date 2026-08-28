@@ -139,4 +139,13 @@ app.delete('/api/data/:key', auth, async (req,res) => {
 
 app.use(express.static(new URL('../', import.meta.url).pathname));
 
-initDb().then(()=>app.listen(PORT,()=>console.log(`WebClass API running on :${PORT}`))).catch(err=>{console.error(err);process.exit(1)});
+initDb()
+  .then(() => {
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`WebClass API running on :${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.error('Database initialization failed:', err);
+    process.exit(1);
+  });
