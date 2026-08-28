@@ -284,7 +284,7 @@ async function initDb() {
     process.env.ADMIN_USERNAME || 'admin';
 
   const adminPass =
-    process.env.ADMIN_PASSWORD || 'Admin2705';
+    process.env.ADMIN_PASSWORD || 'admin2705';
 
   const adminHash =
     await bcrypt.hash(adminPass, 12);
@@ -315,7 +315,11 @@ async function initDb() {
   await resetStudentPasswordsOnce();
 }
 
-app.get('/api/health', async (_req, res) => {
+app.get('/', (_req, res) => {
+  res.send('WebClass API is running!');
+});
+
+app.get('/api/health', async (_req,res) => {
   try {
     await pool.query('SELECT 1');
 
